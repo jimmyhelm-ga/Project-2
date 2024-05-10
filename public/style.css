@@ -1,0 +1,114 @@
+.button {
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    font-family: "Press Start 2P", system-ui;
+    margin-top: 10px;
+    margin-left: 50px;
+    display: block;
+
+    
+}
+
+body {
+    background-image: url("https://cdn.mos.cms.futurecdn.net/BfemybeKVXCf9pgX9WCxsc-1200-80.jpg.webp");
+    background-color: black;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.exitSerenityMode {
+    position: absolute;
+    top: 10px; 
+    left: 10px; 
+}
+
+
+h1 {
+    color: orange;
+    font-size: 50px;
+    font-family: "Press Start 2P", system-ui;
+
+     }
+   
+
+h2 {
+    color: orange;
+    font-size: 25;
+    font-family: "Press Start 2P", system-ui;
+}
+
+label {
+    color: orange;
+    font-size: 50px;
+    font-family: "Press Start 2P", system-ui;
+}
+
+p {
+    color: orange;
+    font-size: 25px;
+    font-family: "Press Start 2P", system-ui;
+}
+
+
+.fire {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    margin-top: 10px;
+    margin-left: 50px;
+}
+
+.fireAnimation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}  
+
+
+textarea {
+    width: 300px; 
+    height: 200px; 
+    resize: none; 
+    padding: none; 
+    background-color: black;
+    color: white;
+    font-family: "Press Start 2P", system-ui;
+    margin: auto;
+    display: block;
+}
+
+.timer {
+    font-size: 48px; 
+    color: orange; 
+    font-family: "Press Start 2P", system-ui;
+}
+
+
+  .gameOverButton {
+    font-family: "Press Start 2P", system-ui;
+}
+
+.textBoxDiv {
+    margin-top: 20px; 
+}
+
+.serenityMode {
+    position: absolute;
+    top: 10px; 
+    left: 10px; 
+}
+
+.exitSerenityMode {
+    position: absolute;
+    top: 10px; 
+    left: 10px; 
+    display: none;
+}
