@@ -8,18 +8,21 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        .startFire {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+    </style>
 </head>
 <body>
+    <div class="startFire">
+        <button class="button" id="writePoem"><a href="/poems/new">Write Poem</a></button>
+    </div>
     <div class="exitSerenityMode">
         <button class="button" id="exitSerenityMode">Exit Serenity Mode</button>
     </div> 
-    <div class="startFire">
-        <button class="button" id="writePoem"><a href="/poems/new">Write Poem</a></button>
-        <button class="button" id="pastPoems"><a href="/poems/index">View Past Poems</a></button>
-        <button class="button" id="updatePoem"><a href="/poems/edit">Edit Poem</a></button>
-        <button class="button" id="deletePoem">Throw Poem in the Fire</button>
-    </div>  
-
     <div class="textBoxDiv">
         <% poems.forEach(poem => { %>
             <form action="/poems/<%= poem._id %>?_method=PUT" method="POST">

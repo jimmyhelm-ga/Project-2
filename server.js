@@ -15,7 +15,7 @@ mongoose.connection.on("connected", () => {
     console.log(`Connected to MongoDB ${mongoose.connection.name}.`);
 });
 
-// Middleware
+
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static('public'));
 app.use(morgan('dev'));
@@ -37,34 +37,42 @@ app.get('/poems/new', (req, res) => {
     res.render('poems/new.ejs');
 });
 
+// Route to view all poems
 app.get('/poems/all', async (req, res) => {
-    const allPoems = await Poem.find();
-    console.log('allPoems', allPoems)
-    res.render('poems/show.ejs', {poems: allPoems})
-})
+    try {
+        const allPoems = await Poem.find();
+        res.render('poems/show.ejs', { poems: allPoems });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
 
+// Route to create a new poem
 app.post('/poems', async (req, res) => {
     try {
         const { poem } = req.body;
         const createdPoem = await Poem.create({ poem });
-        res.redirect('/poems');
+        res.redirect('/poems/all');
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
 });
 
+// Route to edit a specific poem
 app.get('/poems/:id/edit', async (req, res) => {
     try {
         const poem = await Poem.findById(req.params.id);
+        const poems = await Poem.find(); // Fetching all poems
         if (!poem) {
             return res.status(404).json({ message: 'Poem not found' });
         }
-        res.render('poems/edit.ejs', { poem });
+        res.render('poems/edit.ejs', { poem, poems }); // Passing 'poems' to the template
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
 });
 
+// Route to update a specific poem
 app.put('/poems/:id', async (req, res) => {
     try {
         const { poem } = req.body;
@@ -72,13 +80,26 @@ app.put('/poems/:id', async (req, res) => {
         if (!updatedPoem) {
             return res.status(404).json({ message: 'Poem not found' });
         }
-        res.redirect('/poems');
+        res.redirect('/poems/all');
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
 });
 
+// Route to delete a specific poem
+app.delete('/poems/:id', async (req, res) => {
+    try {
+        const deletedPoem = await Poem.findByIdAndDelete(req.params.id);
+        if (!deletedPoem) {
+            return res.status(404).json({ message: 'Poem not found' });
+        }
+        res.redirect('/poems/all');
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
 
+// Route to view all poems
 app.get('/poems', async (req, res) => {
     try {
         const poems = await Poem.find();
@@ -88,44 +109,19 @@ app.get('/poems', async (req, res) => {
     }
 });
 
-
-
-
+// Route to view all poems for editing
 app.get('/poems/edit', async (req, res) => {
     try {
-        
         const poems = await Poem.find();
-        
-        // Then render the edit.ejs template and pass the fetched poems to it
         res.render('poems/edit.ejs', { poems });
     } catch (err) {
-        // Handle errors if any
         res.status(500).json({ error: err.message });
     }
 });
-
-app.delete('/poems/:id', async (req, res) => {
-    try {
-        const deletedPoem = await Poem.findByIdAndDelete(req.params.id);
-        if (!deletedPoem) {
-            return res.status(404).json({ message: 'Poem not found' });
-        }
-        res.redirect('/poems/index');
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
-});
-
-
 
 app.listen(3000, () => {
     console.log("Listening on port 3000");
-  });
-  
-
-
-
-
+});
 
 
 

@@ -1,19 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <link rel="stylesheet" href="/style.css">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-    </head>
-    <body>
-        <div>
-            <% poems.forEach((poem, idx) => { %>
-                <li>
-                    <label>Poem #<%= idx + 1 %></label>
-                    <p><%= poem.poem %></p>
-                </li>
-            <% }); %>
-        </div>
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Poems</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        .poem-container {
+            font-size: 14px; 
+        }
+        .poem-title {
+            font-weight: bold;
+        }
+        #writePoem, .button {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 16px;
+        }
+        #writePoem {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <button id="writePoem" class="button"><a href="/poems/new">Write Poem</a></button>
+    <div class="poem-container">
+        <% poems.forEach((poem, idx) => { %>
+            <div>
+                <p class="poem-title">Poem #<%= idx + 1 %></p>
+                <p><%= poem.poem %></p>
+                <form action="/poems/<%= poem._id %>?_method=DELETE" method="POST">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button type="submit" class="button">Throw Poem in the Fire</button>
+                </form>
+                <button class="button"><a href="/poems/<%= poem._id %>/edit">Edit Poem</a></button>
+            </div>
+        <% }); %>
+    </div>
+</body>
 </html>
