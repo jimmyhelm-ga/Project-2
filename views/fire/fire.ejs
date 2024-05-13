@@ -35,7 +35,46 @@
     </div>
 
     </div>    
+    <script>
+        const stokeButton = document.getElementById("stokeFire");
+        const fireImage = document.getElementById("fireAnimation");
+        const putOutFireButton = document.getElementById("putOutFire")
+        let stokeCount = 0;
+    
+        stokeButton.addEventListener("click", function() {
+            // Toggle between GIFs based on the number of clicks
+            if (stokeCount % 2 === 0) {
+                fireImage.src = "https://i.gifer.com/origin/d9/d9dd657cfef3fb5188596ace989a7dd7_w200.gif";
+            } else {
+                fireImage.src = "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExcWppemY5dHFzcnE0YTBkazUwNHl2c2hzeGE3bWt3YTFwZWI0eWJiOCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/h4UU5HbRX7R8pjHEpa/giphy.gif";
+            }
+            
+            stokeCount++; // Increment the click count
+            textBox.value += "\nYou stoked the fire!";
+    
+        });
+        putOutFireButton.addEventListener("click", function() {
+        fireImage.src = "https://www.animationsoftware7.com/img/agifs/smoke04.gif";
+        textBoxDiv.style.display = "none";
 
+
+    const gameOverButton = document.createElement("button");
+        gameOverButton.textContent = "The Fire Went Out. Click Here to Start Again.";
+        gameOverButton.classList.add("gameOverButton"); // Add a class for styling
+        gameOverButton.addEventListener("click", function() {
+            location.reload(); // Reload the page
+        });
+
+    document.body.appendChild(gameOverButton);
+
+        serenityModeButton.style.display = "none";
+        exitSerenityModeDiv.style.display = "none";
+        fireButtons.style.display = "none";
+        poemButtons.style.display = "none";
+
+        
+    });
+    </script>
    
 
 </body>

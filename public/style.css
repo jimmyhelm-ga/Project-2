@@ -110,5 +110,5 @@ textarea {
     position: absolute;
     top: 10px; 
     left: 10px; 
-    display: none;
+    display: block;
 }
